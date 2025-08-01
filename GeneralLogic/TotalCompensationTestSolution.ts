@@ -227,6 +227,14 @@ function getHoursWorked(start: string, end: string): number {
   const endDate = new Date(end);
   const msDiff = endDate.getTime() - startDate.getTime();
   const hours = msDiff / (1000 * 60 * 60);
+
+  if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+    throw new Error(`Invalid date format: start = ${start}, end = ${end}`);
+  }
+  if (startDate > endDate) {
+    throw new Error(`Start time is after end time: start=${start}, end=${end}`);
+  }
+
   return hours;
 }
 
@@ -239,6 +247,16 @@ function getHoursWorked(start: string, end: string): number {
 function flattenEmployeePunches(
   employee: EmployeePunchData
 ): { job: string; hours: number; start: string }[] {
+  for (const punch of employee.timePunch) {
+    if (!punch.job || !punch.start || !punch.end) {
+      throw new Error(
+        `Invalid punch data for employee '${
+          employee.employee
+        }': ${JSON.stringify(punch)}`
+      );
+    }
+  }
+
   return employee.timePunch.map((punch) => ({
     job: punch.job,
     hours: getHoursWorked(punch.start, punch.end),
