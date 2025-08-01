@@ -14,7 +14,7 @@ This project calculates total wages and benefits for employees based on classifi
 
 ## 🚀 Running the Program
 
-1. **Ensure the file** `TotalCompensationTestSolution.ts` (or your renamed equivalent) contains the input data.
-2. **Open a Bash terminal** in the project directory (make sure you are in the solution folder whenever you run the command below).
+1. **Ensure the file** `TotalCompensationTestSolution.ts` contains the input data.
+2. **Open a Bash terminal** in the project directory (make sure you are in the 'Solution' folder whenever you run the command below).
 3. **Run the program with:**
    `   npx ts-node --compiler-options '{"module":"CommonJS"}' TotalCompensationTestSolution.ts`
